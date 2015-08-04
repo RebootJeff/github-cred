@@ -1,0 +1,22 @@
+{
+  "name": "github-contribution-finder",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'Add tests!'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RebootJeff/github-contribution-finder.git"
+  },
+  "author": "@RebootJeff",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/RebootJeff/github-contribution-finder/issues"
+  },
+  "homepage": "https://github.com/RebootJeff/github-contribution-finder#readme",
+  "dependencies": {
+    "request-promise": "^0.4.3"
+  }
+}

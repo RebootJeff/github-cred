@@ -1,1 +1,1 @@
-# gh-contributions
+# github-contribution-finder
