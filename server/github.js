@@ -73,7 +73,7 @@ github._parseLastPageNumber = function(linkHeader) {
   var startIndex = partToSearch.lastIndexOf(PAGE_QS);
   var substringToSearch = partToSearch.substring(startIndex);
   var substringToParse = substringToSearch.substring(PAGE_QS.length);
-  var lastPageNumber = Utils.getFirstNumbersFromString(substringToParse);
+  var lastPageNumber = Utils.getNumbersFromStringHead(substringToParse);
   return lastPageNumber;
 };
 

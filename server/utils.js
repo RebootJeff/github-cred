@@ -32,7 +32,7 @@ Utils.makeRequestOptions = function(moreOptions) {
 Utils.getBodyProp = R.prop('body');
 Utils.getBodyProps = R.map(Utils.getBodyProp);
 
-Utils.getFirstNumbersFromString = function(string) {
+Utils.getNumbersFromStringHead = function(string) {
   // parseInt will stop converting chars to integers once it hits a non-numeric char
   return parseInt(string, 10);
 };
