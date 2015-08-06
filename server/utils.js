@@ -4,7 +4,7 @@
 var R = require('ramda');
 
 // Internal dependencies
-var TOKEN = process.env.PAT || require('./PAT') || 'test';
+var TOKEN = process.env.PAT || require('./PAT');
 
 var Utils = {};
 
