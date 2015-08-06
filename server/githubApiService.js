@@ -8,20 +8,11 @@ var Utils = require('./utils');
 
 var githubSvc = {};
 
-/*
-- Fetch user's forks.
-  - Get 1st page of forks.
-  - Get all other pages of forks based on 1st page's pagination metadata.
-- For each fork, fetch repo details.
-  - Find parent repo of each fork.
-- For each parent repo, find commits by user.
-  - Find count of additions, count of deletions, timestamp, etc. for each commit.
-- Compile desired data into a simple array of mostly flat objects.
-- Send compiled data to client.
-*/
+// TODO: For each reasonable chunk of requests to GitHub API...
+// log rate-limit, rate-limit-remaining, and rate-limit-reset (as a timestamp).
 
 githubSvc.fetchUserForks = function(username, nextPage) {
-  var forks = [];
+  var forks;
   var url = nextPage || 'https://api.github.com/users/' + username + '/repos';
   var options = Utils.makeRequestOptions({
     qs: { fork: true },
