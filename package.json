@@ -1,5 +1,5 @@
 {
-  "name": "github-contribution-finder",
+  "name": "github-cred",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RebootJeff/github-contribution-finder.git"
+    "url": "git+https://github.com/RebootJeff/github-cred.git"
   },
   "author": "@RebootJeff",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/RebootJeff/github-contribution-finder/issues"
+    "url": "https://github.com/RebootJeff/github-cred/issues"
   },
-  "homepage": "https://github.com/RebootJeff/github-contribution-finder#readme",
+  "homepage": "https://github.com/RebootJeff/github-cred#readme",
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
