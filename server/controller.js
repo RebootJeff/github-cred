@@ -1,18 +1,14 @@
 'use strict';
 
 // Internal dependencies
-var github = require('./github');
-var Utils = require('./utils');
+var github = require('./github/github');
 
 var ctrl = {};
 
 ctrl.findUserData = function(req, res) {
   var username = req.params.username;
 
-  github.fetchForksByUser(username)
-    .then(Utils.getUrlProps)
-    .then(github.fetchReposByUrls)
-    .then(github.fetchParentsPullRequests)
+  github.fetchPullRequestsByUser(username)
     .then(function(result) {
       console.log('\nsend result:', result);
       res.send(result);
