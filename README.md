@@ -30,28 +30,33 @@ Steps:
 
 The app will use the GitHub API (v3) to find a given user's contributions through the following convoluted process:
 
-0. Fetch user's forks.
-  0. Deal with GitHub API's pagination to make sure *all* forks are truly found.
-0. For each fork, fetch repo details.
+0. Fetch user's forks. (`GET /users/:username/repos?fork=true&per_page=100`)
+  0. Deal with GitHub API's pagination to make sure *all* forks are truly found. (`GET /users/:username/repos?fork=true&per_page=100&page=2 ...n`)
+0. For each fork, fetch repo details. (`GET /repos/:username/:fork_repo_name`)
   0. Use details to find parent (aka original) repo of each fork.
-0. For each parent repo, get list of pull requests.
+0. For each parent repo, get list of pull requests. (`GET /repos/:parent_repo_owner/:parent_repo_name/pulls?state=all&per_page=100`)
+  0. Deal with GitHub API's pagination to get *all* PRs. (`GET /repos/:parent_repo_owner/:parent_repo_name/pulls?state=all&per_page=100&page=2 ...n`)
   0. Find pull requests by user in question.
-    0. Deal with GitHub API's pagination to get *all* PRs.
-    0. For each pull requests, find count of additions, count of deletions, timestamp, etc.
+    0. For each pull request, find merge status, various timestamps, count of additions, count of deletions, etc.
 0. Compile desired data into an array of objects.
 0. Do a little dance to celebrate compilation of desired data. Send array as JSON to client.
 
 GitHub API interactions will take place on the server side to make use of a rate-limit-conquering (well, kinda) personal access token. Read the Challenges section of this README for more details. You know you wanna.
 
-### Tech
+### Main Tech
 
 *Work In Progress*
 
-- GitHub API v3
-- Node.js
-  - Express
-- Ramda.js
-- CircleCI
+- Server-side
+  - GitHub API v3
+  - Node.js w/Express
+  - Ramda.js
+  - Jasmine
+  - Helmet
+- Client-side: TBD
+- Dev Ops
+  - CircleCI
+  - Heroku
 
 ### Challenges
 
