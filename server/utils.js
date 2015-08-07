@@ -29,12 +29,19 @@ Utils.makeRequestOptions = function(moreOptions) {
   return options;
 };
 
-Utils.getBodyProp = R.prop('body');
-Utils.getBodyProps = R.map(Utils.getBodyProp);
+Utils.getUrlProps = R.map(R.prop('url'));
+Utils.getParentProps = R.map(R.prop('parent'));
+Utils.getFull_NameProps = R.map(R.prop('full_name'));
+Utils.getBodyProps = R.map(R.prop('body'));
+Utils.combineReponsesBodies = R.compose(R.unnest, Utils.getBodyProps);
 
 Utils.getNumbersFromStringHead = function(string) {
   // parseInt will stop converting chars to integers once it hits a non-numeric char
   return parseInt(string, 10);
 };
+
+Utils.hasFork = R.compose(R.equals(true), R.prop('fork'));
+Utils.filterByFork = R.filter(Utils.hasFork);
+
 
 module.exports = Utils;

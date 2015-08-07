@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/RebootJeff/github-cred#readme",
   "dependencies": {
+    "bluebird": "^2.9.34",
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "gulp": "^3.9.0",

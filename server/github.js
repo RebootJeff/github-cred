@@ -3,6 +3,7 @@
 // External dependencies
 var request = require('request-promise');
 var R = require('ramda');
+var Bluebird = require('bluebird');
 
 // Internal dependencies
 var Utils = require('./utils');
@@ -12,73 +13,88 @@ var github = {};
 // TODO: For each reasonable chunk of requests to GitHub API...
 // log rate-limit, rate-limit-remaining, and rate-limit-reset (as a timestamp).
 
-github.fetchUserForks = function(username) {
+github.fetchUserRepos = function(username) {
   var options = Utils.makeRequestOptions({
-    qs: { fork: true },
     url: 'https://api.github.com/users/' + username + '/repos'
   });
 
-  console.log(options);
-
-  return request(options).promise()
-    .tap(function(response) {
-      console.log(response.headers.link);
-    })
-    .then(Utils.getBodyProp)
-    .then(function(result) {
-      result.forEach(function(repo) {
-        console.log(repo.id, repo.name);
-      });
-    });
+  return fetchAllPages(options);
 };
 
-// function fetchAllPages(options) {
-//   return fetchFirstPage(options)
-//     .then(figureOutPagination)
-//     .then(fetchAndCombineRemainingPages(options))
-// }
+github.fetchForksByUser = function(username) {
+  return github.fetchUserRepos(username)
+    .then(Utils.filterByFork);
+};
+
+github.fetchReposByUrls = function(repoUrls) {
+  var requests = R.map(github.fetchRepoByUrl, repoUrls);
+  return Bluebird.all(requests)
+    .then(Utils.getBodyProps);
+};
+
+github.fetchRepoByUrl = function(url) {
+  var options = Utils.makeRequestOptions({ url: url });
+  return request(options).promise();
+}
 
 function fetchAllPages(options) {
   var firstPageData;
 
-  options.qs = R.merge(options.qs, {
-    page: 1,
-    per_page: 100
-  });
-
-  return request(options).promise()
-    .then(function(response) {
-      var lastPageNumber;
-      var requestsForRemainingPages = [];
-
+  return fetchFirstPage(options)
+    .tap(function(response) {
       firstPageData = response.body;
-
-      if(response.headers.link) {
-        lastPageNumber = github._parseLastPageNumber(response.headers.link);
-        requestsForRemainingPages = makeRequestsForPages(2, lastPageNumber);
-      }
-
-      return requestsForRemainingPages;
     })
+    .then(fetchPagesAfterFirst(options))
     .then(function(responses) {
-      var remainingPagesData = Utils.getBodyProps(responses);
+      var remainingPagesData = Utils.combineReponsesBodies(responses);
       return firstPageData.concat(remainingPagesData);
     });
 }
 
+var fetchPage = R.curry(function(pageNumber, options) {
+  options.qs = R.merge(options.qs, {
+    page: pageNumber,
+    per_page: 100
+  });
+
+  return request(options).promise();
+});
+
+var fetchFirstPage = fetchPage(1);
+
+function fetchPages(options, startPage, endPage) {
+  var requests = [];
+
+  for(var i = startPage; i <= endPage; i++) {
+    requests.push(fetchPage(i, options));
+  }
+
+  return requests;
+}
+
+var fetchPagesAfterFirst = R.curry(function(options, firstPageResponse) {
+  var lastPageNumber;
+  var requestsForRemainingPages = [];
+
+  if(firstPageResponse.headers.link) {
+    lastPageNumber = github._parseLastPageNumber(firstPageResponse.headers.link);
+    requestsForRemainingPages = fetchPages(options, 2, lastPageNumber);
+  }
+
+  return Bluebird.all(requestsForRemainingPages);
+});
+
 github._parseLastPageNumber = function(linkHeader) {
-  var PAGE_QS = '&page=';
+  var PAGE_QS1 = '?page=';
+  var PAGE_QS2 = '&page=';
   var parts = linkHeader.split('last');
-  var partToSearch = parts[0];
-  var startIndex = partToSearch.lastIndexOf(PAGE_QS);
+  var partToSearch = parts[0]; // desired page num will be found to the left of 'last'
+  var startIndex = partToSearch.lastIndexOf(PAGE_QS1);
+  startIndex = (startIndex === -1) ? partToSearch.lastIndexOf(PAGE_QS2) : startIndex;
   var substringToSearch = partToSearch.substring(startIndex);
-  var substringToParse = substringToSearch.substring(PAGE_QS.length);
+  var substringToParse = substringToSearch.substring(PAGE_QS1.length);
   var lastPageNumber = Utils.getNumbersFromStringHead(substringToParse);
   return lastPageNumber;
 };
 
-
-
 module.exports = github;
-
-// github.fetchUserForks('RebootJeff');

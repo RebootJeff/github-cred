@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 
 // Internal dependencies
-var ctrl = require('controller.js');
+var ctrl = require('./server/controller');
 
 var app = express();
 
@@ -29,11 +29,11 @@ app.route('/api/:username')
 
 // Default to home page
 // TODO: Fix this to serve 404 page as appropriate
-app.get('/*', function(req, res, next) {
-  res.sendFile('index.html', {
-    root: __dirname + '/../dist'
-  });
-});
+// app.get('/*', function(req, res, next) {
+//   res.sendFile('index.html', {
+//     root: __dirname + '/../dist'
+//   });
+// });
 
 
 // ============================================================================
