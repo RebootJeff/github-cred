@@ -4,6 +4,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var helmet = require('helmet');
 
 // Internal dependencies
 var ctrl = require('./server/controller');
@@ -19,7 +20,10 @@ var env = process.env.NODE_ENV || 'development';
 app.use(express.static(__dirname + '/../dist'));
 app.use(bodyParser.json());
 app.use(morgan('dev')); // log request/response info to console
-
+app.use(helmet.xssFilter());
+app.use(helmet.frameguard('deny'));
+app.use(helmet.ieNoOpen());
+app.use(helmet.noSniff());
 
 // ============================================================================
 // Basic routes
