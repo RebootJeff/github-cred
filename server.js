@@ -11,23 +11,20 @@ var ctrl = require('./server/controller');
 
 var app = express();
 
-var env = process.env.NODE_ENV || 'development';
 
-
-// ============================================================================
 // Middleware
-// ============================================================================
-app.use(express.static(__dirname + '/../dist'));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
-app.use(morgan('dev')); // log request/response info to console
+if(process.env.NODE_ENV !== 'production') {
+  app.use(morgan('dev')); // log request/response info to console
+}
 app.use(helmet.xssFilter());
 app.use(helmet.frameguard('deny'));
 app.use(helmet.ieNoOpen());
 app.use(helmet.noSniff());
 
-// ============================================================================
+
 // Basic routes
-// ============================================================================
 app.route('/api/:username')
   .get(ctrl.findUserData);
 
@@ -35,14 +32,12 @@ app.route('/api/:username')
 // TODO: Fix this to serve 404 page as appropriate
 // app.get('/*', function(req, res, next) {
 //   res.sendFile('index.html', {
-//     root: __dirname + '/../dist'
+//     root: __dirname + '/public'
 //   });
 // });
 
 
-// ============================================================================
 // Start server
-// ============================================================================
 var port = process.env.PORT || 3000;
 app.listen(port);
 console.log('Listening on port ' + port + '...');
