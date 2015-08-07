@@ -1,0 +1,15 @@
+## Customize the test machine
+machine:
+  timezone:
+    America/Los_Angeles
+
+  # Add some environment variables
+  environment:
+    PAT: testPAT
+
+## Customize deployment commands
+deployment:
+  production:
+    branch: master
+    heroku:
+      appname: github-cred
