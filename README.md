@@ -4,7 +4,7 @@
 
 Prototype is **_not_** ready yet. Please hold your breath accordingly.
 
-Steps:
+Usage:
 
 1. Enter a GitHub username; receive a list contributions to others' repos.
 2. Scrutinize contributions.
@@ -28,18 +28,7 @@ Steps:
 
 ## Development
 
-The app will use the GitHub API (v3) to find a given user's contributions through the following convoluted process:
-
-0. Fetch user's forks. (`GET /users/:username/repos?fork=true&per_page=100`)
-  0. Deal with GitHub API's pagination to make sure *all* forks are truly found. (`GET /users/:username/repos?fork=true&per_page=100&page=2 ...n`)
-0. For each fork, fetch repo details. (`GET /repos/:username/:fork_repo_name`)
-  0. Use details to find parent (aka original) repo of each fork.
-0. For each parent repo, get list of pull requests. (`GET /repos/:parent_repo_owner/:parent_repo_name/pulls?state=all&per_page=100`)
-  0. Deal with GitHub API's pagination to get *all* PRs. (`GET /repos/:parent_repo_owner/:parent_repo_name/pulls?state=all&per_page=100&page=2 ...n`)
-  0. Find pull requests by user in question.
-    0. For each pull request, find merge status, various timestamps, count of additions, count of deletions, etc.
-0. Compile desired data into an array of objects.
-0. Do a little dance to celebrate compilation of desired data. Send array as JSON to client.
+The app will use the GitHub API (v3) to find a given user's contributions.
 
 GitHub API interactions will take place on the server side to make use of a rate-limit-conquering (well, kinda) personal access token. Read the Challenges section of this README for more details. You know you wanna.
 
@@ -61,19 +50,20 @@ GitHub API interactions will take place on the server side to make use of a rate
 ### Challenges
 
 **Problem:** Dealing with [GitHub API rate limits](https://developer.github.com/v3/#rate-limiting).
-The rate limit on vanilla requests to the GitHub API is 60 requests/hour. I burn through that limit like nobody's business because I gotta send roughly 2 bajillion test requests/hour during development.
+The rate limit on vanilla requests to the GitHub Search API is 10 requests/minute. I burn through that limit like nobody's business because I gotta send roughly 2 bajillion test requests/breath during development.
 **Solution:** Use an access token with each request.
-Using a valid access token increases the rate limit to 5,000 requests/hour/token. For prototyping speed's sake, I will rely on a [Personal Access Token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/). The "proper" solution would involve requiring visitors to log into the app via GitHub OAuth. Then I would use their access token.
+Using a valid access token increases the rate limit to 30 requests/minute/token. For prototyping speed's sake, I will rely on a [Personal Access Token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/). The "proper" solution would involve requiring a visitor to log into the app via GitHub OAuth. Then I would use the authenticated visitor's access token.
 
 **Problem:** Hiding my Personal Access Token. You can't expose that shit within a public codebase.
 **Solution:** Use an environment variable.
 Any reliance on the token must take place on the private server. The token is stored in an environment variable. When developing locally, the token is stored in a file that is never committed as part of this repo's public codebase.
 
-**Problem:** Coming to terms with the fact that I must go through a convoluted set of GitHub API requests.
+**Problem:** Coming to terms with the fact that I wasted so much time going through a convoluted set of GitHub API queries before realizing there was a powerful GitHub Search API.
 **Solution:** Venting to my fellow coding friends.
 
-**Problem:** Friends get tired of hearing me complain about public REST APIs.
+**Problem:** Friends get tired of my venting.
 **Solution:** Unknown.
 
 ### Credits
 - Author: [RebootJeff](https://twitter.com/RebootJeff)
+- Cat gif: [Thomas Bogner](https://dribbble.com/shots/1168363-calming-cat-GIF)

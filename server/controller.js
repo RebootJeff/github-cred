@@ -12,9 +12,9 @@ ctrl.findUserData = function(req, res) {
   github.fetchForksByUser(username)
     .then(Utils.getUrlProps)
     .then(github.fetchReposByUrls)
-    .then(Utils.getParentProps)
+    .then(github.fetchParentsPullRequests)
     .then(function(result) {
-      console.log(result);
+      console.log('\nsend result:', result);
       res.send(result);
     });
 };

@@ -10,14 +10,15 @@ var Utils = require('./utils');
 
 var github = {};
 
-// TODO: For each reasonable chunk of requests to GitHub API...
-// log rate-limit, rate-limit-remaining, and rate-limit-reset (as a timestamp).
+// TODO: For each reasonable chunk of requests to GitHub API write to a log of
+// rate-limit, rate-limit-remaining, and rate-limit-reset (as a timestamp).
 
-github.fetchUserRepos = function(username) {
+github.fetchUserPullRequests = function(username) {
+  var searchQuery = 'type:pr+author:' + username;
   var options = Utils.makeRequestOptions({
-    url: 'https://api.github.com/users/' + username + '/repos'
+    url: 'https://api.github.com/search/issues',
+    qs: { q: searchQuery }
   });
-
   return fetchAllPages(options);
 };
 
@@ -35,7 +36,32 @@ github.fetchReposByUrls = function(repoUrls) {
 github.fetchRepoByUrl = function(url) {
   var options = Utils.makeRequestOptions({ url: url });
   return request(options).promise();
-}
+};
+
+github.fetchPullRequestsByRepoFullNames = function(repoFullNames) {
+  var requests = R.map(github.fetchPullRequestsByRepoFullName, repoFullNames);
+  return Bluebird.all(requests)
+    .then(Utils.getBodyProps);
+};
+
+github.fetchPullRequestsByRepoFullName = function(fullName) {
+  var options = Utils.makeRequestOptions({
+    url: 'https://api.github.com/repos/' + fullName + '/pulls?state=all&per_page=100'
+  });
+  return fetchAllPages(options);
+};
+
+github.fetchParentsPullRequests = function(forks) {
+  var parentFullNames = Utils.getFullNamesFromParents(forks);
+  R.forEach(console.log, parentFullNames);
+  var requests = [
+    github.fetchPullRequestsByRepoFullName('squaremo/amqp.node'),
+    github.fetchPullRequestsByRepoFullName('angular/angular.js')
+  ];
+  return Bluebird.all(requests);
+  // return github.fetchPullRequestsByRepoFullNames(parentFullNames);
+};
+
 
 function fetchAllPages(options) {
   var firstPageData;
