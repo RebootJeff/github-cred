@@ -34,6 +34,7 @@ function sendApiRequest(options) {
   return request(options).promise();
 }
 
+
 module.exports = {
   prepRequestOptions: prepRequestOptions,
   sendApiRequest: sendApiRequest

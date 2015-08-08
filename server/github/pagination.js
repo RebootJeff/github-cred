@@ -5,7 +5,7 @@ var R = require('ramda');
 var Bluebird = require('bluebird');
 
 // Internal dependencies
-var sendApiRequest = require('./sendApiRequest').sendApiRequest;
+var sendApiRequest = require('./apiRequest').sendApiRequest;
 var Utils = require('../utils');
 
 function fetchAllPages(options) {
@@ -17,7 +17,7 @@ function fetchAllPages(options) {
     })
     .then(fetchPagesAfterFirst(options))
     .then(function(responses) {
-      var remainingPagesData = Utils.combineReponsesBodies(responses);
+      var remainingPagesData = Utils.compileResponseBodies(responses);
       return firstPageData.concat(remainingPagesData);
     });
 }
@@ -25,7 +25,7 @@ function fetchAllPages(options) {
 var fetchPage = R.curry(function(pageNumber, options) {
   options.qs = R.merge(options.qs, {
     page: pageNumber,
-    per_page: 100
+    per_page: 10
   });
 
   return sendApiRequest(options);

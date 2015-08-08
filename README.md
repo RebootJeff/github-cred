@@ -30,6 +30,18 @@ Usage:
 
 The app will use the GitHub API (v3) to find a given user's contributions.
 
+0. Search for all of a user's PRs.
+0. Filter for PRs that target repos not owned by user.
+0. Request details for each PR.
+0. Extract interesting PR data:
+  - title, body
+  - Counts of additions, deletions, files changed
+  - Count of commits
+  - Count of comments
+  - State (merged?)
+  - Timestamps (created, modified, merged, closed)
+0. Highlight merged PRs.
+
 GitHub API interactions will take place on the server side to make use of a rate-limit-conquering (well, kinda) personal access token. Read the Challenges section of this README for more details. You know you wanna.
 
 ### Main Tech
@@ -48,6 +60,9 @@ GitHub API interactions will take place on the server side to make use of a rate
   - Heroku
 
 ### Challenges
+
+**Problem:** Naming functions/variables when writing code in *functional programming* style is 10x harder.
+**Solution:** Just do it.
 
 **Problem:** Dealing with [GitHub API rate limits](https://developer.github.com/v3/#rate-limiting).
 The rate limit on vanilla requests to the GitHub Search API is 10 requests/minute. I burn through that limit like nobody's business because I gotta send roughly 2 bajillion test requests/breath during development.

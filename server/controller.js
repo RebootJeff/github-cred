@@ -8,13 +8,15 @@ var ctrl = {};
 ctrl.findUserData = function(req, res) {
   var username = req.params.username;
 
-  github.fetchPullRequestsByUser(username)
-    .then(function(result) {
-      console.log('\nsend result:', result);
-      res.send(result);
+  github.searchPullRequestsByUser(username)
+    .then(github.fetchPullRequestsTo3rdPartyRepos)
+    .then(function(pullRequestData) {
+      // TODO: Serialize/organize pullRequestData before sending to client
+      res.send(pullRequestData);
     })
     .catch(function(err) {
       console.error('\nctrl.findUserData error:\n', JSON.stringify(err));
+      res.status(500).send(err.message);
     });
 };
 
