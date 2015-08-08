@@ -22,7 +22,7 @@ function fetchAllPages(options) {
     });
 }
 
-var fetchPage = R.curry(function(pageNumber, options) {
+var fetchPage = R.curry(function(options, pageNumber) {
   options.qs = R.merge(options.qs, {
     page: pageNumber,
     per_page: 10
@@ -31,16 +31,11 @@ var fetchPage = R.curry(function(pageNumber, options) {
   return sendApiRequest(options);
 });
 
-var fetchFirstPage = fetchPage(1);
+var fetchFirstPage = fetchPage(R.__, 1);
 
 function fetchPages(options, startPage, endPage) {
-  var requests = [];
-
-  for(var i = startPage; i <= endPage; i++) {
-    requests.push(fetchPage(i, options));
-  }
-
-  return requests;
+  var pageNumbers = R.range(startPage, endPage + 1);
+  return R.map(fetchPage(options), pageNumbers);
 }
 
 var fetchPagesAfterFirst = R.curry(function(options, firstPageResponse) {
