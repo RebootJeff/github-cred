@@ -5,12 +5,12 @@ var R = require('ramda');
 var request = require('request-promise');
 
 // Internal dependencies
-var TOKEN = process.env.PAT || require('./PAT');
+var PAT = require('../config').PAT;
 
 var BASE_REQUEST_OPTIONS = {
   headers: {
     Accept: 'application/vnd.github.v3+json',
-    Authorization: 'token ' + TOKEN,
+    Authorization: 'token ' + PAT,
     'User-Agent': 'just some app by RebootJeff' // GitHub API doesn't care
   },
   json: true,
