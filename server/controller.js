@@ -12,6 +12,9 @@ ctrl.findUserData = function(req, res) {
     .then(function(result) {
       console.log('\nsend result:', result);
       res.send(result);
+    })
+    .catch(function(err) {
+      console.error('\nctrl.findUserData error:\n', JSON.stringify(err));
     });
 };
 

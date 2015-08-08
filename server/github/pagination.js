@@ -5,7 +5,7 @@ var R = require('ramda');
 var Bluebird = require('bluebird');
 
 // Internal dependencies
-var sendApiRequest = require('./request').sendApiRequest;
+var sendApiRequest = require('./sendApiRequest').sendApiRequest;
 var Utils = require('../utils');
 
 function fetchAllPages(options) {
@@ -13,7 +13,7 @@ function fetchAllPages(options) {
 
   return fetchFirstPage(options)
     .tap(function(response) {
-      firstPageData = response.body;
+      firstPageData = Utils.convertToArray(response.body);
     })
     .then(fetchPagesAfterFirst(options))
     .then(function(responses) {
@@ -58,12 +58,16 @@ var fetchPagesAfterFirst = R.curry(function(options, firstPageResponse) {
 function parseLastPageNumber(linkHeader) {
   var PAGE_QS1 = '?page=';
   var PAGE_QS2 = '&page=';
+
   var parts = linkHeader.split('last');
   var partToSearch = parts[0]; // desired page num will be found to the left of 'last'
+
   var startIndex = partToSearch.lastIndexOf(PAGE_QS1);
   startIndex = (startIndex === -1) ? partToSearch.lastIndexOf(PAGE_QS2) : startIndex;
+
   var substringToSearch = partToSearch.substring(startIndex);
   var substringToParse = substringToSearch.substring(PAGE_QS1.length);
+
   var lastPageNumber = Utils.getNumbersFromStringHead(substringToParse);
   return lastPageNumber;
 }

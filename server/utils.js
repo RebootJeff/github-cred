@@ -13,5 +13,8 @@ Utils.getNumbersFromStringHead = function(string) {
   return parseInt(string, 10);
 };
 
+Utils.convertToArray = function(input) {
+  return [].concat(input);
+};
 
 module.exports = Utils;

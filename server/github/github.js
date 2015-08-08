@@ -9,12 +9,14 @@ var github = {};
 // rate-limit, rate-limit-remaining, and rate-limit-reset (as a timestamp).
 
 github.fetchPullRequestsByUser = function(username) {
-  var searchQuery = 'type:pr+author:' + username;
-  var options = {
-    url: 'https://api.github.com/search/issues',
-    qs: { q: searchQuery }
-  };
-  return pagination.fetchAllPages(options);
+  // Sadly, I must manually attach the Search query string to the URL because
+  // automatic encodeURIcomponent calls (by most Node HTTP libraries) are
+  // screwing with the usual approach for query string management.
+  // But really, it's weird that the GitHub API doesn't support requests to
+  // URLs with partial encoding even though the GitHub website DOES support it.
+  return pagination.fetchAllPages({
+    url: 'https://api.github.com/search/issues?q=type:pr+author:' + username
+  });
 };
 
 
