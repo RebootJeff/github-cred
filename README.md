@@ -16,7 +16,7 @@ Usage:
 
 - [Screenshots](#screenshots)
 - [Development](#development)
-  - [Tech](#tech)
+  - [Main Tech](#main-tech)
   - [Challenges](#challenges)
   - [Credits](#credits)
 
