@@ -26,7 +26,7 @@ function serializePullRequest(pullRequest) {
     additions:    pullRequest.additions,
     deletions:    pullRequest.deletions,
     commits:      pullRequest.commits,
-    changedFiles: pullRequest.changedFiles,
+    changedFiles: pullRequest.changed_files,
     comments:     pullRequest.comments,
     // Timestamps
     createdAt:  pullRequest.created_at,
