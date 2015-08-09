@@ -2,7 +2,7 @@
 
 # GitHub Cred
 
-**[Prototype is ready HERE](http://github-cred.herokuapp.com/)**. Thanks for hold your breath :grin:, but keep in mind that I plan on re-writing large portions of the app and re-deploying with a different architecture.
+**[Prototype is ready HERE](http://github-cred.herokuapp.com/)**. Thanks for holding your breath :grin:, but keep in mind that I plan on re-writing large portions of the app and re-deploying with a different architecture.
 
 Usage:
 
@@ -34,8 +34,8 @@ The app will use the GitHub API (v3) to find a given user's contributions.
 0. Filter for PRs that target repos not owned by user.
 0. Request details for each PR.
 0. Extract interesting PR data:
-  - Main - Title, body, target repo
-  - Stats - of additions, deletions, files changed, etc.
+  - Main - title, body, target repo
+  - Stats - additions, deletions, commits, files changed
   - Status - open, close, merged
   - Timestamps - created, modified, merged, closed
 0. Highlight merged PRs.
