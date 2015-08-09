@@ -22,12 +22,13 @@
              placeholder="Enter a GitHub username"
              autofocus
              required>
-      <button onclick="getPullRequests()">Let's See!</button>
+      <button onclick="getPullRequests()">Explore</button>
     </form>
 
     <div class="overlay hide animated">
-      <h4 class="spinner">Smile at this wonderful gif while I ask GitHub for some data:</h4>
       <img class="spinner" src="images/calming_cat.gif">
+      <p class="spinner">Smile at this wonderful gif
+        <br>for just a moment</p>
     </div>
 
     <section class="main-content-area">
@@ -40,6 +41,8 @@
             <th>Status</th>
             <th>Activity</th>
             <th>Adds/Dels</th>
+            <th>Commits</th>
+            <th>Files</th>
           </tr>
         </thead>
 

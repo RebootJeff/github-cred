@@ -70,10 +70,12 @@ function makePullRequestHtml(pullRequest) {
   return '<tr>' +
     '<td><img class="avatar" src="' + pullRequest.parentAvatar + '"></td>' +
     '<td><a href="' + pullRequest.parentUrl + '">' + pullRequest.parentName + '</a></td>' +
-    '<td>' + pullRequest.title + '</td>' +
-    '<td class="status">' + (pullRequest.merged ? '<span class="merged">merged</span>' : pullRequest.state) + '</td>' +
-    '<td class="date"><a href="' + pullRequest.url + '">' + Utils.getLatestDateString(pullRequest) + '</a></td>' +
-    '<td class="adds-dels">+' + pullRequest.additions + ' -' + pullRequest.deletions + '</td>' +
+    '<td class="title-col">' + pullRequest.title + '</td>' +
+    '<td class="centered-col">' + (pullRequest.merged ? '<span class="merged">merged</span>' : pullRequest.state) + '</td>' +
+    '<td class="centered-col"><a href="' + pullRequest.url + '">' + Utils.getLatestDateString(pullRequest) + '</a></td>' +
+    '<td class="centered-col">+' + pullRequest.additions + '/-' + pullRequest.deletions + '</td>' +
+    '<td class="centered-col">' + pullRequest.commits + '</td>' +
+    '<td class="centered-col">' + pullRequest.changedFiles + '</td>' +
     // '<td>' + pullRequest.foo + '</td>' +
     '</tr>';
 }
