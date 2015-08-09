@@ -43,15 +43,5 @@ github.fetchPullRequestsTo3rdPartyRepos = R.compose(
   Utils.findPullRequestsTo3rdPartyRepos
 );
 
-var COOLEST_PR_PROPS = [
-   // Main info
-  'title', 'body', 'state', 'merged',
-  // Stats
-  'additions', 'deletions', 'changed_files', 'commits', 'comments',
-  // Timestamps
-  'created_at', 'modified_at', 'merged_at', 'closed_at'
-];
-github.serializePullRequestData = R.map(R.pick(COOLEST_PR_PROPS));
-
 
 module.exports = github;

@@ -34,12 +34,10 @@ The app will use the GitHub API (v3) to find a given user's contributions.
 0. Filter for PRs that target repos not owned by user.
 0. Request details for each PR.
 0. Extract interesting PR data:
-  - title, body
-  - Counts of additions, deletions, files changed
-  - Count of commits
-  - Count of comments
-  - State (merged?)
-  - Timestamps (created, modified, merged, closed)
+  - Main - Title, body, target repo
+  - Stats - of additions, deletions, files changed, etc.
+  - Status - open, close, merged
+  - Timestamps - created, modified, merged, closed
 0. Highlight merged PRs.
 
 GitHub API interactions will take place on the server side to make use of a rate-limit-conquering (well, kinda) personal access token. Read the Challenges section of this README for more details. You know you wanna.

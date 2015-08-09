@@ -1,11 +1,8 @@
 'use strict';
 
-// External dependencies
-var R = require('ramda');
-
 // Internal dependencies
 var github = require('./github/github');
-var Utils = require('./utils');
+var serializePullRequests = require('./github/serialization').serializePullRequests;
 
 var ctrl = {};
 
@@ -13,10 +10,9 @@ ctrl.findUserPullRequests = function(req, res) {
   var username = req.params.username;
 
   github.searchPullRequestsByUser(username)
-    .tap(R.compose(Utils.trace('search results:'), R.head))
     .then(github.fetchPullRequestsTo3rdPartyRepos)
     .then(function(pullRequests) {
-      var responseBody = github.serializePullRequestData(pullRequests);
+      var responseBody = serializePullRequests(pullRequests);
       res.send(responseBody);
     })
     .catch(function(err) {
