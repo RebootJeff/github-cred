@@ -35,7 +35,7 @@ The app will use the GitHub API (v3) to find a given user's contributions.
 0. Request details for each PR.
 0. Extract interesting PR data:
   - Main - title, body, target repo
-  - Stats - additions, deletions, commits, files changed
+  - Stats - additions, deletions, commits, etc.
   - Status - open, close, merged
   - Timestamps - created, modified, merged, closed
 0. Highlight merged PRs.
@@ -79,6 +79,9 @@ Any reliance on the token must take place on the private server. The token is st
 
 **Problem:** Friends get tired of my venting.
 **Solution:** Unknown.
+
+**Problem:** Trying to learn functional programming.
+**Solution:** Focus on [fundamentals of curry, compose, etc](http://rebootjeff.github.io/blog/2015/06/14/refactoring-towards-functional-programming-in-javascript/) before worrying about applicatives, functors, etc.
 
 ### Credits
 - Author: [RebootJeff](https://twitter.com/RebootJeff)
