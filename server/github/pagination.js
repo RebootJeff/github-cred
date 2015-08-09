@@ -25,7 +25,7 @@ function fetchAllPages(options) {
 var fetchPage = R.curry(function(options, pageNumber) {
   options.qs = R.merge(options.qs, {
     page: pageNumber,
-    per_page: 10
+    per_page: 100
   });
 
   return sendApiRequest(options);
