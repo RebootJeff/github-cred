@@ -13,10 +13,12 @@ function fetchAllPages(options) {
 
   return fetchFirstPage(options)
     .tap(function(response) {
+      Utils.logRateLimitFromResponse(true, response);
       firstPageData = Utils.convertToArray(response.body);
     })
     .then(fetchPagesAfterFirst(options))
     .then(function(responses) {
+      // TODO: Refactor this anonymous func by using R.concat()
       var remainingPagesData = Utils.compileResponseBodies(responses);
       return firstPageData.concat(remainingPagesData);
     });

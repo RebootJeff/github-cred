@@ -3,12 +3,29 @@
 // External dependencies
 var R = require('ramda');
 
+// Internal dependencies
+var config = require('./config');
+
 var Utils = {};
 
 // FP-friendly version of console.log
-Utils.trace = R.curry(function(tag, x) {
+Utils.log = R.curry(function(tag, x) {
   console.log(tag, x);
   return x;
+});
+
+Utils.logInDev = R.curry(function(tag, x) {
+  if(config.ENV === 'development') {
+    console.log(tag, x);
+  }
+  return x;
+});
+
+Utils.logRateLimitFromResponse = R.curry(function(devOnlyFlag, response) {
+  if(devOnlyFlag === false || (devOnlyFlag && config.ENV === 'development')) {
+    console.log('Rate limit remaining:', response.headers['x-ratelimit-remaining']);
+  }
+  return response;
 });
 
 Utils.getBodyProps = R.map(R.prop('body'));
