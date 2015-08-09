@@ -1,16 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GitHub Cred</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
   </head>
 
   <body>
 
-    <h1>Under construction. Please enjoy this gif for now.</h1>
-    <img src="images/calming_cat.gif">
+    <header>
+      <h1 id="">GitHub Cred</h1>
+      <h4>Investigate public pull requests. For funsies.</h4>
+    </header>
 
+    <form name="searchForm">
+      <input name="username"
+             type="text"
+             placeholder="Enter a GitHub username"
+             autofocus
+             required>
+      <button onclick="getPullRequests()">Let's See!</button>
+    </form>
 
-    <script src="app.js"></script>
+    <div class="overlay hide animated">
+      <h4 class="spinner">Smile at this wonderful gif while I ask GitHub for some data:</h4>
+      <img class="spinner" src="images/calming_cat.gif">
+    </div>
+
+    <section class="main-content-area">
+      <table>
+        <thead>
+          <tr>
+            <th><!-- Parent Repo Avatar column --></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- PR data will be displayed here -->
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      <p class="left">Protoype by <a href="https://twitter.com/rebootjeff">@RebootJeff</a></p>
+      <p class="right">Code available on <a href="https://github.com/RebootJeff/github-cred">GitHub</a></p>
+    </footer>
+
+    <script src="bundle.js"></script>
   </body>
 
 </html>
