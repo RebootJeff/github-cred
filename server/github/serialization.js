@@ -14,10 +14,12 @@ function serializePullRequest(pullRequest) {
   return {
     // Main info
     url:          pullRequest.html_url,
-    parentRepo:   serialization.parseRepoFullName(pullRequest.html_url),
+    parentName:   serialization.parseRepoFullName(pullRequest.html_url),
+    parentUrl:    pullRequest.base.repo.html_url,
     title:        pullRequest.title,
     body:         pullRequest.body,
     merged:       pullRequest.merged,
+    number:       pullRequest.number,
     state:        pullRequest.state,
     parentAvatar: pullRequest.base.user.avatar_url,
     // Stats
