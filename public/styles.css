@@ -40,20 +40,24 @@ input {
   border: 0;
   border-bottom: 3px solid #6e5494;
   font-size: 1.7em;
+  font-weight: bold;
   text-align: center;
-  color: #6e5494;
 }
 
 input::-webkit-input-placeholder {
+  font-weight: lighter;
 	color: rgba(79, 41, 88, 0.4);
 }
 input::-moz-placeholder {
+  font-weight: lighter;
 	color: rgba(79, 41, 88, 0.5);
 }
 input:-moz-placeholder {   /* Older versions of Firefox */
+  font-weight: lighter;
 	color: rgba(79, 41, 88, 0.5);
 }
 input:-ms-input-placeholder {
+  font-weight: lighter;
 	color: rgba(79, 41, 88, 0.5);
 }
 
@@ -174,6 +178,10 @@ h4.spinner {
   display: none;
 }
 
+.main-content-area {
+  margin-bottom: 3em;
+}
+
 footer {
   position: fixed;
   bottom: 0;
@@ -210,17 +218,29 @@ table {
   margin: auto;
 }
 
+th {
+  font-weight: bold;
+}
+
 td {
   padding: 0.5em;
-  max-width: 15%;
+  max-width: 300px;
   vertical-align: middle;
 }
 
 td a {
-  color: #66CEFF;
+  color: #6e5494;
   text-decoration: none;
 }
 
 td a:visited {
-  color: #6e5494;
+  color: #66CEFF;
+}
+
+.merged {
+  font-weight: bold;
+}
+
+td.status, td.date, td.adds-dels {
+  text-align: center;
 }
