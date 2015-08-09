@@ -2,7 +2,7 @@
 
 # GitHub Cred
 
-Prototype is **_not_** ready yet. Please hold your breath accordingly.
+**[Prototype is ready HERE](http://github-cred.herokuapp.com/)**. Thanks for hold your breath :grin:, but keep in mind that I plan on re-writing large portions of the app and re-deploying with a different architecture.
 
 Usage:
 
