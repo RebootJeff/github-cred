@@ -24,7 +24,7 @@ Usage:
 
 ## Screenshots
 
-*Work In Progress*
+![screenshot](./public/images/github_cred_screenshot.png)
 
 ## Development
 
@@ -52,7 +52,10 @@ GitHub API interactions will take place on the server side to make use of a rate
   - Ramda.js
   - Jasmine
   - Helmet
-- Client-side: TBD
+- Client-side:
+  - Vanilla JS
+  - Browserify
+  - Ramda.js
 - Dev Ops
   - CircleCI
   - Heroku
