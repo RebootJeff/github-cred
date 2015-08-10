@@ -7,7 +7,7 @@ var R = require('ramda');
 // Internal dependencies
 var sendApiRequest = require('./apiRequest').sendApiRequest;
 var pagination = require('./pagination');
-var Utils = require('../utils');
+var utils = require('../utils');
 
 var github = {};
 
@@ -23,7 +23,7 @@ github.searchPullRequestsByUser = function(username) {
   return pagination.fetchAllPages({
     url: 'https://api.github.com/search/issues?q=type:pr+author:' + username
   })
-    .then(Utils.compileItems);
+    .then(utils.compileItems);
 };
 
 github.fetchPullRequestDetail = function(searchResult) {
@@ -36,15 +36,15 @@ github.fetchPullRequestDetails = function(searchResults) {
   var requests = R.map(github.fetchPullRequestDetail, searchResults);
   return Bluebird.all(requests)
     .tap(R.compose(
-      Utils.maybeLogRateLimitFromResponse,
+      utils.maybeLogRateLimitFromResponse,
       R.last)
     )
-    .then(Utils.getBodyProps);
+    .then(utils.getBodyProps);
 };
 
 github.fetchPullRequestsTo3rdPartyRepos = R.compose(
   github.fetchPullRequestDetails,
-  Utils.findPullRequestsTo3rdPartyRepos
+  utils.findPullRequestsTo3rdPartyRepos
 );
 
 
