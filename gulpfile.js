@@ -11,14 +11,15 @@ var nodemon = require('gulp-nodemon');
 // var sourcemaps = require('gulp-sourcemaps');
 // var gutil = require('gulp-util');
 
-gulp.task('build-clean', function() {
-  del([
-    './public/bundle.js',
-    './public/main.css'
-  ]);
+gulp.task('clean-scripts', function() {
+  del('./public/bundle.js');
 });
 
-gulp.task('build-scripts', ['build-clean'], function() {
+gulp.task('clean-styles', function() {
+  del('./public/main.css');
+});
+
+gulp.task('build-scripts', ['clean-scripts'], function() {
   return browserify({
     entries: ['./client/scripts/app.js']
   })
@@ -32,7 +33,7 @@ gulp.task('build-scripts', ['build-clean'], function() {
   .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('build-styles', ['build-clean'], function() {
+gulp.task('build-styles', ['clean-styles'], function() {
   return gulp.src('./client/styles/main.styl')
     .pipe(stylus({
       compress: true
