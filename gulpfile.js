@@ -25,7 +25,7 @@ gulp.task('build-scripts', function () {
 });
 
 gulp.task('build-styles', function () {
-  return gulp.src('./client/styles/index.styl')
+  return gulp.src('./client/styles/main.styl')
     .pipe(stylus({
       compress: true
     }))
