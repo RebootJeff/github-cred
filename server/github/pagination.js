@@ -2,7 +2,7 @@
 
 // External dependencies
 var R = require('ramda');
-var Bluebird = require('bluebird');
+var Promise = require('bluebird');
 
 // Internal dependencies
 var sendApiRequest = require('./apiRequest').sendApiRequest;
@@ -49,7 +49,7 @@ var fetchPagesAfterFirst = R.curry(function(options, firstPageResponse) {
     requestsForRemainingPages = fetchPages(options, 2, lastPageNumber);
   }
 
-  return Bluebird.all(requestsForRemainingPages);
+  return Promise.all(requestsForRemainingPages);
 });
 
 function parseLastPageNumber(linkHeader) {

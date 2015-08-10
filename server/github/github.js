@@ -1,7 +1,7 @@
 'use strict';
 
 // External dependencies
-var Bluebird = require('bluebird');
+var Promise = require('bluebird');
 var R = require('ramda');
 
 // Internal dependencies
@@ -34,7 +34,7 @@ github.fetchPullRequestDetail = function(searchResult) {
 
 github.fetchPullRequestDetails = function(searchResults) {
   var requests = R.map(github.fetchPullRequestDetail, searchResults);
-  return Bluebird.all(requests)
+  return Promise.all(requests)
     .tap(R.compose(
       utils.maybeLogRateLimitFromResponse,
       R.last)
