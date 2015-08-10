@@ -1,0 +1,60 @@
+input, button {
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+  -moz-box-shadow: 0 0 0 1000px white inset;
+  box-shadow: 0 0 0 1000px white inset;
+  color: #6e5494;
+}
+
+input {
+  width: 320px;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 3px solid #6e5494;
+  font-size: 1.7em;
+  font-weight: bold;
+  text-align: center;
+}
+
+input::-webkit-input-placeholder {
+  font-weight: lighter;
+	color: rgba(79, 41, 88, 0.4);
+}
+input::-moz-placeholder {
+  font-weight: lighter;
+	color: rgba(79, 41, 88, 0.5);
+}
+input:-moz-placeholder {   /* Older versions of Firefox */
+  font-weight: lighter;
+	color: rgba(79, 41, 88, 0.5);
+}
+input:-ms-input-placeholder {
+  font-weight: lighter;
+	color: rgba(79, 41, 88, 0.5);
+}
+
+/*csslint outline-none:false */
+input:focus {
+  outline: none;
+}
+
+button {
+  min-width: 160px;
+  padding: 15px;
+  border: 0;
+  /*border: 3px solid white;*/
+  border-radius: 6px;
+  background-color: #6e5494;
+  font-size: 1.5em;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 2px;
+}
+
+button:hover, button:focus {
+  outline: none;
+  background-color: #6e5494;
+}
