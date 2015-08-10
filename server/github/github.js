@@ -36,7 +36,7 @@ github.fetchPullRequestDetails = function(searchResults) {
   var requests = R.map(github.fetchPullRequestDetail, searchResults);
   return Bluebird.all(requests)
     .tap(R.compose(
-      Utils.logRateLimitFromResponse(false),
+      Utils.maybeLogRateLimitFromResponse,
       R.head)
     )
     .then(Utils.getBodyProps);

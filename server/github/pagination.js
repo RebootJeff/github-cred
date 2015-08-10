@@ -13,7 +13,7 @@ function fetchAllPages(options) {
 
   return fetchFirstPage(options)
     .tap(function(response) {
-      Utils.logRateLimitFromResponse(true, response);
+      Utils.maybeLogRateLimitFromResponse(response);
       firstPageData = Utils.convertToArray(response.body);
     })
     .then(fetchPagesAfterFirst(options))

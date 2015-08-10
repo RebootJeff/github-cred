@@ -21,12 +21,12 @@ Utils.logInDev = R.curry(function(tag, x) {
   return x;
 });
 
-Utils.logRateLimitFromResponse = R.curry(function(devOnlyFlag, response) {
-  if(devOnlyFlag === false || (devOnlyFlag && config.ENV === 'development')) {
+Utils.maybeLogRateLimitFromResponse = function(response) {
+  if(config.LOG_RATE_LIMIT) {
     console.log('Rate limit remaining:', response.headers['x-ratelimit-remaining']);
   }
   return response;
-});
+};
 
 Utils.getBodyProps = R.map(R.prop('body'));
 Utils.compileResponseBodies = R.compose(R.unnest, Utils.getBodyProps);
