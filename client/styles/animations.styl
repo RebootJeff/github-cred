@@ -1,7 +1,5 @@
 .animated {
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  animation-fill-mode: both;
+  animation-fill-mode(both)
 }
 
 @-webkit-keyframes fadeIn {
@@ -25,12 +23,8 @@
 }
 
 .fadeIn {
-  -webkit-animation-duration: 200ms;
-  -moz-animation-duration: 200ms;
-  animation-duration: 200ms;
-  -webkit-animation-name: fadeIn;
-  -moz-animation-name: fadeIn;
-  animation-name: fadeIn;
+  animation-duration(200ms)
+  animation-name(fadeIn)
   display: block;
 }
 
@@ -56,13 +50,6 @@
 
 .fadeOut {
   /* duration must be equal to setTimeout delay for .hide */
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: fadeOut;
-  -moz-animation-name: fadeOut;
-  animation-name: fadeOut;
+  animation-duration(1s)
+  animation-name(fadeOut)
 }
