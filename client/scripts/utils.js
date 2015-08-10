@@ -3,9 +3,9 @@
 // External dependencies
 var R = require('ramda');
 
-var Utils = {};
+var utils = {};
 
-Utils.preventDefaultFormBehavior = function() {
+utils.preventDefaultFormBehavior = function() {
   document.querySelector('form').addEventListener('submit', function(event){
     event.preventDefault();
   }, true);
@@ -23,7 +23,7 @@ function convertTimestampToDate(timestamp) {
 
 var convertTimestampsToDates = R.map(convertTimestampToDate);
 
-Utils.getLatestDateString = function(pullRequest) {
+utils.getLatestDateString = function(pullRequest) {
   var timestamps = pickTimestamps(pullRequest);
   var dates = convertTimestampsToDates(timestamps);
   var latestDate = Math.max.apply(Math, dates);
@@ -32,4 +32,4 @@ Utils.getLatestDateString = function(pullRequest) {
   return latestDate.toLocaleDateString();
 };
 
-module.exports = Utils;
+module.exports = utils;

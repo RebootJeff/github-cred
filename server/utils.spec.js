@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Utilities', function() {
-  var Utils = require('./utils');
+  var utils = require('./utils');
 
   describe('compileResponseBodies method', function() {
     it('should extract body arrays from multiple objects into one partially flattened array', function() {
@@ -10,7 +10,7 @@ describe('Utilities', function() {
         { body: [3, 4] },
         { body: [5, [6, 7]] }
       ];
-      var result = Utils.compileResponseBodies(fakeResponses);
+      var result = utils.compileResponseBodies(fakeResponses);
       expect(result).toEqual([1, 2, 3, 4, 5, [6, 7]]);
     });
   });
@@ -18,13 +18,13 @@ describe('Utilities', function() {
   describe('getNumbersFromStringHead method', function() {
     it('should get the first numeric chars from a string', function() {
       var fakeInput = '1 asdf 234';
-      var result = Utils.getNumbersFromStringHead(fakeInput);
+      var result = utils.getNumbersFromStringHead(fakeInput);
       expect(result).toBe(1);
     });
 
     it('should get the first numeric chars as a single number', function() {
       var fakeInput = '123asdf456';
-      var result = Utils.getNumbersFromStringHead(fakeInput);
+      var result = utils.getNumbersFromStringHead(fakeInput);
       expect(result).toBe(123);
     });
   });
@@ -35,7 +35,7 @@ describe('Utilities', function() {
         url: 'https://api.github.com/repos/RebootJeff/test/issues/1',
         user: { login: 'RebootJeff' }
       };
-      var result = Utils.isPullRequestTo3rdPartyRepo(fakePullRequests);
+      var result = utils.isPullRequestTo3rdPartyRepo(fakePullRequests);
       expect(result).toBe(false);
     });
 
@@ -44,7 +44,7 @@ describe('Utilities', function() {
         url: 'https://api.github.com/repos/sequelize/express-example/issues/26',
         user: { login: 'RebootJeff' }
       };
-      var result = Utils.isPullRequestTo3rdPartyRepo(fakePullRequests);
+      var result = utils.isPullRequestTo3rdPartyRepo(fakePullRequests);
       expect(result).toBe(true);
     });
 
@@ -53,7 +53,7 @@ describe('Utilities', function() {
         url: 'https://api.github.com/repos/fakeOwner/RebootJeff/issues/1',
         user: { login: 'RebootJeff' }
       };
-      var result = Utils.isPullRequestTo3rdPartyRepo(fakePullRequests);
+      var result = utils.isPullRequestTo3rdPartyRepo(fakePullRequests);
       expect(result).toBe(true);
     });
   });
