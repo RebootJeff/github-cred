@@ -37,7 +37,7 @@ github.fetchPullRequestDetails = function(searchResults) {
   return Bluebird.all(requests)
     .tap(R.compose(
       Utils.maybeLogRateLimitFromResponse,
-      R.head)
+      R.last)
     )
     .then(Utils.getBodyProps);
 };
