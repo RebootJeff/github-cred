@@ -20,11 +20,19 @@
     "bluebird": "^2.9.34",
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
-    "gulp": "^3.9.0",
     "helmet": "^0.10.0",
     "jasmine-node": "^1.14.5",
     "morgan": "^1.6.1",
     "ramda": "^0.17.1",
     "request-promise": "^0.4.3"
+  },
+  "devDependencies": {
+    "browserify": "^11.0.1",
+    "gulp": "^3.9.0",
+    "gulp-nodemon": "^2.0.3",
+    "gulp-stylus": "^2.0.6",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "vinyl-transform": "^1.0.0"
   }
 }
