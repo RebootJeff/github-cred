@@ -36,7 +36,7 @@ The app will use the GitHub API (v3) to find a given user's contributions.
 0. Extract interesting PR data:
   - Main - title, body, target repo
   - Stats - additions, deletions, commits, etc.
-  - Status - open, close, merged
+  - Status - open, closed, merged
   - Timestamps - created, modified, merged, closed
 0. Highlight merged PRs.
 
@@ -46,7 +46,7 @@ GitHub API interactions will take place on the server side to make use of a rate
 
 *Work In Progress*
 
-- Server-side
+- Server-side:
   - GitHub API v3
   - Node.js w/Express
   - Ramda.js
@@ -56,7 +56,7 @@ GitHub API interactions will take place on the server side to make use of a rate
   - Vanilla JS
   - Browserify
   - Ramda.js
-- Dev Ops
+- Dev Ops:
   - CircleCI
   - Heroku
 
@@ -64,6 +64,9 @@ GitHub API interactions will take place on the server side to make use of a rate
 
 **Problem:** Naming functions/variables when writing code in *functional programming* style is 10x harder.
 **Solution:** Just do it.
+
+**Problem:** Trying to learn functional programming.
+**Solution:** Focus on [fundamentals of curry, compose, etc](http://rebootjeff.github.io/blog/2015/06/14/refactoring-towards-functional-programming-in-javascript/).
 
 **Problem:** Dealing with [GitHub API rate limits](https://developer.github.com/v3/#rate-limiting).
 The rate limit on vanilla requests to the GitHub Search API is 10 requests/minute. I burn through that limit like nobody's business because I gotta send roughly 2 bajillion test requests/breath during development.
@@ -80,9 +83,6 @@ Any reliance on the token must take place on the private server. The token is st
 **Problem:** Friends get tired of my venting.
 **Solution:** Unknown.
 
-**Problem:** Trying to learn functional programming.
-**Solution:** Focus on [fundamentals of curry, compose, etc](http://rebootjeff.github.io/blog/2015/06/14/refactoring-towards-functional-programming-in-javascript/) before worrying about applicatives, functors, etc.
-
 ### Credits
-- Author: [RebootJeff](https://twitter.com/RebootJeff)
+- Creator: [RebootJeff](https://twitter.com/RebootJeff)
 - Cat gif: [Thomas Bogner](https://dribbble.com/shots/1168363-calming-cat-GIF)
