@@ -16,7 +16,7 @@ ctrl.findUserPullRequests = function(req, res) {
       res.send(responseBody);
     })
     .catch(function(err) {
-      console.error('\nctrl.findUserData error:\n', JSON.stringify(err));
+      console.error('\nctrl.findUserPullRequests error:\n', JSON.stringify(err));
       res.status(500).send(err.message);
     });
 };
