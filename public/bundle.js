@@ -2,14 +2,14 @@
 'use strict';
 
 // Internal dependencies
-var Utils = require('./utils');
+var utils = require('./utils');
 
 var input = document.querySelector('input');
 var overlay = document.querySelector('.overlay');
 var tableHead = document.querySelector('thead');
 var tableBody = document.querySelector('tbody');
 
-Utils.preventDefaultFormBehavior();
+utils.preventDefaultFormBehavior();
 
 window.getPullRequests = function() {
   var username = input.value;
@@ -72,7 +72,7 @@ function makePullRequestHtml(pullRequest) {
     '<td><a href="' + pullRequest.parentUrl + '">' + pullRequest.parentName + '</a></td>' +
     '<td class="title-col">' + pullRequest.title + '</td>' +
     '<td class="centered-col">' + (pullRequest.merged ? '<span class="merged">merged</span>' : pullRequest.state) + '</td>' +
-    '<td class="centered-col"><a href="' + pullRequest.url + '">' + Utils.getLatestDateString(pullRequest) + '</a></td>' +
+    '<td class="centered-col"><a href="' + pullRequest.url + '">' + utils.getLatestDateString(pullRequest) + '</a></td>' +
     '<td class="centered-col">+' + pullRequest.additions + '/-' + pullRequest.deletions + '</td>' +
     '<td class="centered-col">' + pullRequest.commits + '</td>' +
     '<td class="centered-col">' + pullRequest.changedFiles + '</td>' +
@@ -86,9 +86,9 @@ function makePullRequestHtml(pullRequest) {
 // External dependencies
 var R = require('ramda');
 
-var Utils = {};
+var utils = {};
 
-Utils.preventDefaultFormBehavior = function() {
+utils.preventDefaultFormBehavior = function() {
   document.querySelector('form').addEventListener('submit', function(event){
     event.preventDefault();
   }, true);
@@ -106,7 +106,7 @@ function convertTimestampToDate(timestamp) {
 
 var convertTimestampsToDates = R.map(convertTimestampToDate);
 
-Utils.getLatestDateString = function(pullRequest) {
+utils.getLatestDateString = function(pullRequest) {
   var timestamps = pickTimestamps(pullRequest);
   var dates = convertTimestampsToDates(timestamps);
   var latestDate = Math.max.apply(Math, dates);
@@ -115,7 +115,7 @@ Utils.getLatestDateString = function(pullRequest) {
   return latestDate.toLocaleDateString();
 };
 
-module.exports = Utils;
+module.exports = utils;
 
 },{"ramda":3}],3:[function(require,module,exports){
 //  Ramda v0.17.1
