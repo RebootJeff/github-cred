@@ -46,19 +46,25 @@ GitHub API interactions will take place on the server side to make use of a rate
 
 *Work In Progress*
 
-- Server-side:
-  - GitHub API v3
-  - Node.js w/Express
-  - Ramda.js
-  - Jasmine
-  - Helmet
-- Client-side:
-  - Vanilla JS
-  - Browserify
-  - Ramda.js
-- Dev Ops:
-  - CircleCI
-  - Heroku
+Server-Side Tech | Description
+--- | ---
+GitHub API v3 | Reservoir of interesting data
+Node.js w/Express | Platform for server
+Jasmine | Framework for unit testing
+Helmet | Library of Express security features
+
+Client-Side Tech | Description
+--- | ---
+Vanilla JS | ES5 JavaScript for app logic and DOM work
+Browserify | Module system for organizing code/libraries
+Stylus | CSS preprocessor
+
+Other Tech | Description
+--- | ---
+Ramda.js | Library of functional programming utilities
+Gulp | Build system
+CircleCI | Continuous integration
+Heroku | Hosting platform
 
 ### Challenges
 
