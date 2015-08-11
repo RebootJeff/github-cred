@@ -5,8 +5,8 @@ var R = require('ramda');
 
 var utils = {};
 
-utils.preventDefaultFormBehavior = function() {
-  document.querySelector('form').addEventListener('submit', function(event){
+utils.preventDefaultFormBehavior = function(form) {
+  form.addEventListener('submit', function(event){
     event.preventDefault();
   }, true);
 };
@@ -30,6 +30,12 @@ utils.getLatestDateString = function(pullRequest) {
   // Math.max will yield UNIX timestamp (integer), so we must re-convert.
   latestDate = convertTimestampToDate(latestDate);
   return latestDate.toLocaleDateString();
+};
+
+utils.getElementAnimationDuration = function(el) {
+  var animationDuration = window.getComputedStyle(el).getPropertyValue('animation-duration');
+  var delay = 1000 * parseInt(animationDuration, 10);
+  return delay;
 };
 
 module.exports = utils;

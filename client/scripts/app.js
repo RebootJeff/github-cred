@@ -1,20 +1,25 @@
 'use strict';
 
 // Internal dependencies
+var auth = require('./auth');
 var utils = require('./utils');
 
 var input = document.querySelector('input');
+var form = document.querySelector('form');
 var overlay = document.querySelector('.overlay');
 var tableHead = document.querySelector('thead');
 var tableBody = document.querySelector('tbody');
 
-utils.preventDefaultFormBehavior();
+utils.preventDefaultFormBehavior(form);
+
+window.login = auth.login;
 
 window.getPullRequests = function() {
   var username = input.value;
 
   if(username !== '') {
-    toggleSpinner(overlay);
+    input.blur();
+    toggleElementDisplay(overlay);
     getData(username);
   }
 
@@ -28,7 +33,7 @@ function getData(username) {
   request.open('GET', url, true);
 
   request.onload = function() {
-    toggleSpinner(overlay);
+    toggleElementDisplay(overlay);
     if (request.status >= 200 && request.status < 400) {
       var data = JSON.parse(request.responseText);
       tableHead.classList.remove('hide');
@@ -39,23 +44,28 @@ function getData(username) {
   };
   request.onerror = function() {
     // There was a connection error of some sort
-    toggleSpinner(overlay);
+    toggleElementDisplay(overlay);
   };
 
   request.send();
 }
 
-function toggleSpinner(overlay) {
-  if(overlay.classList.contains('hide')) {
-    overlay.classList.remove('fadeOut');
-    overlay.classList.remove('hide');
-    overlay.classList.add('fadeIn');
+function toggleElementDisplay(el) {
+  var delay;
+
+  if(el.classList.contains('hide')) {
+    el.classList.remove('fadeOut');
+    el.classList.remove('hide');
+    el.classList.add('fadeIn');
   } else {
-    overlay.classList.remove('fadeIn');
-    overlay.classList.add('fadeOut');
+    el.classList.remove('fadeIn');
+    el.classList.add('fadeOut');
+
+    // delay must be equal to .fadeOut CSS animation duration
+    delay = utils.getElementAnimationDuration(el);
     setTimeout(function() {
-      overlay.classList.add('hide');
-    }, 1000); // delay must be equal to fadeOut CSS animation duration
+      el.classList.add('hide');
+    }, delay);
   }
 }
 
