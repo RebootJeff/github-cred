@@ -1,4 +1,4 @@
-input, button {
+input {
   display: block;
   margin: 0 auto 20px auto;
 }
@@ -11,7 +11,7 @@ input {
   width: 320px;
   padding: 10px 0;
   border: 0;
-  border-bottom: 3px solid #6e5494;
+  border-bottom: 3px solid $primary_color;
   font-size: 1.7em;
   font-weight: bold;
   text-align: center;
@@ -39,18 +39,10 @@ input:focus {
   outline: none;
 }
 
-button {
-  min-width: 160px;
+form button {
+  display: block;
+  min-width: 120px;
+  margin: 0 auto 20px auto;
   padding: 15px;
-  border: 0;
-  border-radius: 6px;
-  background-color: #6e5494;
   font-size: 1.5em;
-  color: white;
-  box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 2px;
-}
-
-button:hover, button:focus {
-  outline: none;
-  background-color: #6e5494;
 }
