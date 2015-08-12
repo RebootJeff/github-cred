@@ -1,0 +1,11 @@
+{
+  "firebase": "github-cred",
+  "public": "public",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**",
+    "**/PAT.js",
+    "junk*"
+  ]
+}
