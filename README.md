@@ -1,6 +1,6 @@
 [![Circle CI](https://circleci.com/gh/RebootJeff/github-cred.svg?style=svg)](https://circleci.com/gh/RebootJeff/github-cred)
 
-# GitHub Cred
+# ![PR Merge Icon](public/images/pr_merge_icon.png) GitHub Cred
 
 **[Prototype is ready HERE](http://github-cred.herokuapp.com/)**. Thanks for holding your breath :grin:, but keep in mind that I plan on re-writing large portions of the app and re-deploying with a different architecture.
 
