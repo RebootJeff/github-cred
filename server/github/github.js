@@ -11,7 +11,7 @@ var utils = require('../utils');
 
 var github = {};
 
-// TODO: For each reasonable chunk of requests to GitHub API write to a log of
+// TODO: For each reasonable chunk of requests to GitHub API, write to a log of
 // rate-limit, rate-limit-remaining, and rate-limit-reset (as a timestamp).
 
 github.searchPullRequestsByUser = function(username) {
