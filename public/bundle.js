@@ -15,6 +15,7 @@ window.getPullRequests = function() {
   var username = input.value;
 
   if(username !== '') {
+    input.blur();
     toggleSpinner(overlay);
     getData(username);
   }
